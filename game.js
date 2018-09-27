@@ -44,6 +44,18 @@ window.addEventListener('keyup', function () {
 
 setInterval(() => {
 
+    if (forwardPressed) {
+        acceleration = 1;
+    } else {
+        acceleration = 0;
+    }
 
+    if (backwardsPressed) {
+        acceleration = -1;
+    } 
 
-})
+    position = position + acceleration;
+
+    tank.style.left = position + 'px';
+
+}, 16)
