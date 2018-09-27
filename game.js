@@ -1,5 +1,5 @@
 var tank = document.querySelector('#tank');
-var field = document.querySelector('#field')
+var field = document.querySelector('#field');
 // var position = 0;
 // var acceleration = 0;
 // var rotation = 0;
@@ -12,9 +12,9 @@ var turretRotateToggle = false;
 
 
 var angle = 0;
-var degInRadius = 2*Math.PI/360;
-var tankX = field.offsetWidth/2;
-var tankY = field.offsetHeight/2;
+var degInRadius = 2 * Math.PI / 360;
+var tankX = field.offsetWidth / 2;
+var tankY = field.offsetHeight / 2;
 
 tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
 
@@ -27,25 +27,25 @@ window.addEventListener('keydown', function (event) {
         forwardPressed = true;
         tankX = tankX + Math.cos(degInRadius * angle);
         tankY = tankY + Math.sin(degInRadius * angle);
-        tank.style.top = tankY+'px';
+        tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyS') {
         backwardsPressed = true;
         tankX = tankX - Math.cos(degInRadius * angle);
         tankY = tankY - Math.sin(degInRadius * angle);
-        tank.style.top = tankY+'px';
+        tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyA') {
         rotateLeft = true;
         angle--;
-        tank.style.transform = 'rotate('+ angle +'deg)'
+        tank.style.transform = 'rotate(' + angle + 'deg)'
     }
     if (event.code === 'KeyD') {
         rotateRight = true;
         angle++;
-        tank.style.transform = 'rotate('+ angle +'deg)'
+        tank.style.transform = 'rotate(' + angle + 'deg)'
     }
     if (event.code === 'KeyR') {
         turretRotateToggle = true;
@@ -67,6 +67,17 @@ window.addEventListener('keyup', function () {
     if (event.code === 'KeyR') {
         turretRotateToggle = false;
     }
+})
+
+//try to make turret rotate with mouse cursor pos
+var turretBase = document.querySelector('#turret-base');
+var mouseX = 0;
+var mouseY = 0;
+
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    console.log(mouseX + ' , ' + mouseY)
 })
 
 // setInterval(() => {
