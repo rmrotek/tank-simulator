@@ -1,6 +1,11 @@
 var tank = document.querySelector('#tank');
 var position = 0;
 var acceleration = 0;
+var forwardPressed = false;
+var backwardsPressed = false;
+var rotateLeft = false;
+var rotateRight = false;
+var turretRotateToggle = false;
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
@@ -35,4 +40,10 @@ window.addEventListener('keyup', function () {
     if (event.code === 'KeyR') {
         turretRotateToggle = false;
     }
+})
+
+setInterval(() => {
+
+
+
 })
