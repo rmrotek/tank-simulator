@@ -77,7 +77,8 @@ var mouseY = 0;
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    console.log(mouseX + ' , ' + mouseY)
+
+    //TODO make torretbase rotate to match mouse pointer
 })
 
 // setInterval(() => {
