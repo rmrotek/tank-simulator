@@ -2,6 +2,7 @@ var tank = document.querySelector('#tank');
 var position = 0;
 var acceleration = 0;
 var rotation = 0;
+var rotationChange = 0;
 var forwardPressed = false;
 var backwardsPressed = false;
 var rotateLeft = false;
@@ -55,8 +56,20 @@ setInterval(() => {
         acceleration = -1;
     } 
 
+    if (rotateRight) {
+        rotationChange = 1;
+    } else {
+        rotationChange = 0;
+    }
+
+    if (rotateLeft) {
+        rotationChange = -1;
+    }
+
     position = position + acceleration;
+    rotation = rotation + rotationChange
 
     tank.style.left = position + 'px';
+    tank.style.transform = 'rotate('+ rotation +'deg)'
 
 }, 16)
