@@ -1,6 +1,7 @@
 var tank = document.querySelector('#tank');
 var position = 0;
 var acceleration = 0;
+var rotation = 0;
 var forwardPressed = false;
 var backwardsPressed = false;
 var rotateLeft = false;
