@@ -1,26 +1,51 @@
 var tank = document.querySelector('#tank');
-var position = 0;
-var acceleration = 0;
-var rotation = 0;
-var rotationChange = 0;
+var field = document.querySelector('#field')
+// var position = 0;
+// var acceleration = 0;
+// var rotation = 0;
+// var rotationChange = 0;
 var forwardPressed = false;
 var backwardsPressed = false;
 var rotateLeft = false;
 var rotateRight = false;
 var turretRotateToggle = false;
 
+
+var angle = 0;
+var degInRadius = 2*Math.PI/360;
+var tankX = field.offsetWidth/2;
+var tankY = field.offsetHeight/2;
+
+tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
+
+
+
+
+
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
         forwardPressed = true;
+        tankX = tankX + Math.cos(degInRadius * angle);
+        tankY = tankY + Math.sin(degInRadius * angle);
+        tank.style.top = tankY+'px';
+        tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyS') {
         backwardsPressed = true;
+        tankX = tankX - Math.cos(degInRadius * angle);
+        tankY = tankY - Math.sin(degInRadius * angle);
+        tank.style.top = tankY+'px';
+        tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyA') {
         rotateLeft = true;
+        angle--;
+        tank.style.transform = 'rotate('+ angle +'deg)'
     }
     if (event.code === 'KeyD') {
         rotateRight = true;
+        angle++;
+        tank.style.transform = 'rotate('+ angle +'deg)'
     }
     if (event.code === 'KeyR') {
         turretRotateToggle = true;
@@ -44,32 +69,32 @@ window.addEventListener('keyup', function () {
     }
 })
 
-setInterval(() => {
+// setInterval(() => {
 
-    if (forwardPressed) {
-        acceleration = 1;
-    } else {
-        acceleration = 0;
-    }
+//     if (forwardPressed) {
+//         acceleration = 1;
+//     } else {
+//         acceleration = 0;
+//     }
 
-    if (backwardsPressed) {
-        acceleration = -1;
-    } 
+//     if (backwardsPressed) {
+//         acceleration = -1;
+//     } 
 
-    if (rotateRight) {
-        rotationChange = 1;
-    } else {
-        rotationChange = 0;
-    }
+//     if (rotateRight) {
+//         rotationChange = 1;
+//     } else {
+//         rotationChange = 0;
+//     }
 
-    if (rotateLeft) {
-        rotationChange = -1;
-    }
+//     if (rotateLeft) {
+//         rotationChange = -1;
+//     }
 
-    position = position + acceleration;
-    rotation = rotation + rotationChange
+//     position = position + acceleration;
+//     rotation = rotation + rotationChange
 
-    tank.style.left = position + 'px';
-    tank.style.transform = 'rotate('+ rotation +'deg)'
+//     tank.style.left = position + 'px';
+//     tank.style.transform = 'rotate('+ rotation +'deg)'
 
-}, 16)
+// }, 16)
