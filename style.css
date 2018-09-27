@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#app {
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#field {
+    background: rgb(202, 195, 195);
+    width: 95vw;
+    height: 90vh;
+    position: relative;
+    
+}
+
+#tank {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: green;
+}
+
