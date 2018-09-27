@@ -25,5 +25,32 @@ body {
     width: 60px;
     height: 40px;
     background: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+
+}
+
+#turret-base {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: greenyellow;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: visible;
+    position: relative;
+
+}
+
+#turret {
+    width: 20px;
+    height: 6px;
+    background: rgb(47, 255, 255);
+    overflow: visible;
+    margin-left: 15%;
+    position: absolute;
 }
 
