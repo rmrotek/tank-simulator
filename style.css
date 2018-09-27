@@ -17,6 +17,7 @@ body {
     width: 95vw;
     height: 90vh;
     position: relative;
+    z-index: 0;
     
 }
 
@@ -29,6 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: visible;
+    z-index: 1;
 
 }
 
@@ -42,6 +44,7 @@ body {
     align-items: center;
     overflow: visible;
     position: relative;
+    z-index: 2;
 
 }
 
@@ -52,5 +55,16 @@ body {
     overflow: visible;
     margin-left: 15%;
     position: absolute;
+    z-index: 3;
 }
 
+.ball {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: black;
+    position: absolute;
+    z-index: 10;
+}
+
+/* left, right etc, transform: rotate(1deg) to move and rotate */
