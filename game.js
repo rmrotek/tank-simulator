@@ -30,6 +30,19 @@ var turretAngle = 0;
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
+        if(turretBaseX > field.offsetWidth) {
+            tankX = 0;
+            turretBaseX = 0;
+
+        }
+
+        if(turretBaseY > field.offsetHeight) {
+            tankY = 0;
+            turretBaseY = 0;
+
+        }
+        
+        
         forwardPressed = true;
         tankX = tankX + Math.cos(degInRadius * tankAngle);
         tankY = tankY + Math.sin(degInRadius * tankAngle);
