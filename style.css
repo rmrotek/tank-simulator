@@ -39,13 +39,14 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: greenyellow;
+    background: linear-gradient(black, greenyellow);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: visible;
-    position: absolute;
+    position: relative;
     z-index: 2;
+    transform-origin: 50% 50%;
 
 }
 
