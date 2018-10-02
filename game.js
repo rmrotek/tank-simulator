@@ -10,42 +10,56 @@ var rotateLeft = false;
 var rotateRight = false;
 var turretRotateToggle = false;
 
-
-var angle = 0;
+// tank vars 
+var tankAngle = 0;
 var degInRadius = 2 * Math.PI / 360;
 var tankX = field.offsetWidth / 2;
 var tankY = field.offsetHeight / 2;
 
 tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
 
-
+//turret vars
+var turretBase = document.querySelector('#turret-base');
+var turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
+var turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+var mouseX = 0;
+var mouseY = 0;
 
 
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
         forwardPressed = true;
-        tankX = tankX + Math.cos(degInRadius * angle);
-        tankY = tankY + Math.sin(degInRadius * angle);
+        tankX = tankX + Math.cos(degInRadius * tankAngle);
+        tankY = tankY + Math.sin(degInRadius * tankAngle);
+        turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
+        turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`)
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyS') {
         backwardsPressed = true;
-        tankX = tankX - Math.cos(degInRadius * angle);
-        tankY = tankY - Math.sin(degInRadius * angle);
+        tankX = tankX - Math.cos(degInRadius * tankAngle);
+        tankY = tankY - Math.sin(degInRadius * tankAngle);
+        turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
+        turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`)
+
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyA') {
         rotateLeft = true;
-        angle--;
-        tank.style.transform = 'rotate(' + angle + 'deg)'
+        tankAngle--;
+        tank.style.transform = 'rotate(' + tankAngle + 'deg)';
+        
     }
     if (event.code === 'KeyD') {
         rotateRight = true;
-        angle++;
-        tank.style.transform = 'rotate(' + angle + 'deg)'
+        tankAngle++;
+        tank.style.transform = 'rotate(' + tankAngle + 'deg)';
+        
     }
     if (event.code === 'KeyR') {
         turretRotateToggle = true;
@@ -69,16 +83,18 @@ window.addEventListener('keyup', function () {
     }
 })
 
-//try to make turret rotate with mouse cursor pos
-var turretBase = document.querySelector('#turret-base');
-var mouseX = 0;
-var mouseY = 0;
 
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
 
-    //TODO make torretbase rotate to match mouse pointer
+field.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX - field.offsetLeft;
+    mouseY = e.clientY - field.offsetTop;
+
+    console.log(`mousex ${mouseX}, mousey ${mouseY}`);
+
+    var turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180/Math.PI);
+
+    turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+
 })
 
 
