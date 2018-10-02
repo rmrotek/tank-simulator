@@ -44,7 +44,7 @@ window.addEventListener('keydown', function (event) {
         tankY = tankY - Math.sin(degInRadius * tankAngle);
         turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
         turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
-        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`)
+        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`);
 
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';

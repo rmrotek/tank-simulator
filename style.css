@@ -41,7 +41,7 @@ body {
     border-radius: 50%;
     background: greenyellow;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     overflow: visible;
     position: relative;
@@ -54,9 +54,10 @@ body {
     height: 6px;
     background: rgb(47, 255, 255);
     overflow: visible;
-    margin-left: 15%;
     position: absolute;
     z-index: 3;
+    top: -1px;
+    transform: rotate(-90deg);
 }
 
 .ball {
