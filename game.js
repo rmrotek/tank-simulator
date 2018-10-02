@@ -105,6 +105,7 @@ window.addEventListener('keydown', function (event) {
             return;
         }
         if (turretRotateToggle) {
+            window.removeEventListener('mousemove', (e));
             turretRotateToggle = false;
             console.log(turretRotateToggle)
             return;
