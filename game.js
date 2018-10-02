@@ -31,15 +31,25 @@ var turretAngle = 0;
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
         if(turretBaseX > field.offsetWidth) {
-            tankX = 0;
+            tankX = 0 - (tank.offsetWidth / 2);
             turretBaseX = 0;
+
+        }
+        if(turretBaseX < 0) {
+            tankX = field.offsetWidth - (tank.offsetWidth / 2);
+            turretBaseX = field.offsetWidth;
 
         }
 
         if(turretBaseY > field.offsetHeight) {
-            tankY = 0;
+            tankY = 0 - (tank.offsetHeight / 2);
             turretBaseY = 0;
 
+        }
+
+        if (turretBaseY < 0) {
+            tankY = field.offsetHeight - (tank.offsetHeight / 2);
+            turretBaseY = field.offsetHeight;
         }
         
         
@@ -53,6 +63,27 @@ window.addEventListener('keydown', function (event) {
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyS') {
+        if(turretBaseX > field.offsetWidth) {
+            tankX = 0 - (tank.offsetWidth / 2);
+            turretBaseX = 0;
+
+        }
+        if(turretBaseX < 0) {
+            tankX = field.offsetWidth - (tank.offsetWidth / 2);
+            turretBaseX = field.offsetWidth;
+
+        }
+
+        if(turretBaseY > field.offsetHeight) {
+            tankY = 0 - (tank.offsetHeight / 2);
+            turretBaseY = 0;
+
+        }
+
+        if (turretBaseY < 0) {
+            tankY = field.offsetHeight - (tank.offsetHeight / 2);
+            turretBaseY = field.offsetHeight;
+        }
         backwardsPressed = true;
         tankX = tankX - Math.cos(degInRadius * tankAngle);
         tankY = tankY - Math.sin(degInRadius * tankAngle);
