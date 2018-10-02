@@ -55,24 +55,14 @@ window.addEventListener('keydown', function (event) {
         tankAngle--;
         tank.style.transform = 'rotate(' + tankAngle + 'deg)';
 
-        // turretAngle = turretAngle +1 ;
-        // turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-        // console.log(turretAngle);
         return turretAngle;
-
     }
     if (event.code === 'KeyD') {
         rotateRight = true;
         tankAngle++;
         tank.style.transform = 'rotate(' + tankAngle + 'deg)';
 
-        // turretAngle = turretAngle -1 ;
-        // turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-        // console.log(turretAngle);
         return turretAngle;
-
-
-
     }
     if (event.code === 'KeyR') {
         turretRotateToggle = true;
@@ -101,15 +91,6 @@ window.addEventListener('keyup', function () {
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX - field.offsetLeft;
     mouseY = e.clientY - field.offsetTop;
-
-    // var tr = window.getComputedStyle(turretBase, null).getPropertyValue('transform');
-
-    // var values = tr.split('(')[1],
-    // values = values.split(')')[0],
-    // values = values.split(',');
-
-    // console.log(`mousex ${mouseX}, mousey ${mouseY}`);
-
 
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
     turretAngle -= tankAngle;
