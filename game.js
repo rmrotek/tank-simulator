@@ -13,15 +13,15 @@ var turretRotateToggle = false;
 // tank vars 
 var tankAngle = 0;
 var degInRadius = 2 * Math.PI / 360;
-var tankX = field.offsetWidth / 2;
-var tankY = field.offsetHeight / 2;
+var tankX = (field.offsetWidth / 2) - (tank.offsetWidth / 2);
+var tankY = (field.offsetHeight / 2) - (tank.offsetHeight / 2);
 
 tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
 
 //turret vars
 var turretBase = document.querySelector('#turret-base');
-var turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
-var turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+var turretBaseX = field.offsetWidth / 2;
+var turretBaseY = field.offsetHeight / 2;
 var mouseX = 0;
 var mouseY = 0;
 
@@ -32,8 +32,8 @@ window.addEventListener('keydown', function (event) {
         forwardPressed = true;
         tankX = tankX + Math.cos(degInRadius * tankAngle);
         tankY = tankY + Math.sin(degInRadius * tankAngle);
-        turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
-        turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+        turretBaseX = turretBaseX + Math.cos(degInRadius * tankAngle);
+        turretBaseY = turretBaseY + Math.sin(degInRadius * tankAngle);
         console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`)
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
@@ -42,8 +42,8 @@ window.addEventListener('keydown', function (event) {
         backwardsPressed = true;
         tankX = tankX - Math.cos(degInRadius * tankAngle);
         tankY = tankY - Math.sin(degInRadius * tankAngle);
-        turretBaseX = turretBase.offsetParent.offsetLeft + turretBase.offsetWidth/2;
-        turretBaseY = turretBase.offsetParent.offsetTop + turretBase.offsetHeight/2;
+        turretBaseX = turretBaseX - Math.cos(degInRadius * tankAngle);
+        turretBaseY = turretBaseY - Math.sin(degInRadius * tankAngle);
         console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`);
 
         tank.style.top = tankY + 'px';
@@ -85,7 +85,7 @@ window.addEventListener('keyup', function () {
 
 
 
-field.addEventListener('mousemove', (e) => {
+window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX - field.offsetLeft;
     mouseY = e.clientY - field.offsetTop;
 
