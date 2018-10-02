@@ -26,33 +26,32 @@ var mouseX = 0;
 var mouseY = 0;
 var turretAngle = 0;
 
+function offScreenCheck() {
+    if (turretBaseX > field.offsetWidth) {
+        tankX = 0 - (tank.offsetWidth / 2);
+        turretBaseX = 0;
+    }
+    if (turretBaseX < 0) {
+        tankX = field.offsetWidth - (tank.offsetWidth / 2);
+        turretBaseX = field.offsetWidth;
+    }
 
+    if (turretBaseY > field.offsetHeight) {
+        tankY = 0 - (tank.offsetHeight / 2);
+        turretBaseY = 0;
+    }
+
+    if (turretBaseY < 0) {
+        tankY = field.offsetHeight - (tank.offsetHeight / 2);
+        turretBaseY = field.offsetHeight;
+    }
+}
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
-        if(turretBaseX > field.offsetWidth) {
-            tankX = 0 - (tank.offsetWidth / 2);
-            turretBaseX = 0;
+        offScreenCheck();
 
-        }
-        if(turretBaseX < 0) {
-            tankX = field.offsetWidth - (tank.offsetWidth / 2);
-            turretBaseX = field.offsetWidth;
 
-        }
-
-        if(turretBaseY > field.offsetHeight) {
-            tankY = 0 - (tank.offsetHeight / 2);
-            turretBaseY = 0;
-
-        }
-
-        if (turretBaseY < 0) {
-            tankY = field.offsetHeight - (tank.offsetHeight / 2);
-            turretBaseY = field.offsetHeight;
-        }
-        
-        
         forwardPressed = true;
         tankX = tankX + Math.cos(degInRadius * tankAngle);
         tankY = tankY + Math.sin(degInRadius * tankAngle);
@@ -63,27 +62,8 @@ window.addEventListener('keydown', function (event) {
         tank.style.left = tankX + 'px';
     }
     if (event.code === 'KeyS') {
-        if(turretBaseX > field.offsetWidth) {
-            tankX = 0 - (tank.offsetWidth / 2);
-            turretBaseX = 0;
+        offScreenCheck();
 
-        }
-        if(turretBaseX < 0) {
-            tankX = field.offsetWidth - (tank.offsetWidth / 2);
-            turretBaseX = field.offsetWidth;
-
-        }
-
-        if(turretBaseY > field.offsetHeight) {
-            tankY = 0 - (tank.offsetHeight / 2);
-            turretBaseY = 0;
-
-        }
-
-        if (turretBaseY < 0) {
-            tankY = field.offsetHeight - (tank.offsetHeight / 2);
-            turretBaseY = field.offsetHeight;
-        }
         backwardsPressed = true;
         tankX = tankX - Math.cos(degInRadius * tankAngle);
         tankY = tankY - Math.sin(degInRadius * tankAngle);
@@ -109,7 +89,33 @@ window.addEventListener('keydown', function (event) {
         return turretAngle;
     }
     if (event.code === 'KeyR') {
-        turretRotateToggle = true;
+        if (!turretRotateToggle) {
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX - field.offsetLeft;
+                mouseY = e.clientY - field.offsetTop;
+            
+                turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
+                turretAngle -= tankAngle;
+                turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+            
+            })
+            turretRotateToggle = true;
+            console.log(turretRotateToggle);
+
+            return;
+        }
+        if (turretRotateToggle) {
+            turretRotateToggle = false;
+            console.log(turretRotateToggle)
+            return;
+
+        }
+    }
+    if (event.code === 'KeyQ') {
+        // turretRotateToggle = true;
+    }
+    if (event.code === 'KeyE') {
+        // turretRotateToggle = true;
     }
 })
 window.addEventListener('keyup', function () {
@@ -126,21 +132,29 @@ window.addEventListener('keyup', function () {
         rotateRight = false;
     }
     if (event.code === 'KeyR') {
-        turretRotateToggle = false;
+        // turretRotateToggle = false;
+    }
+    if (event.code === 'KeyQ') {
+        // turretRotateToggle = true;
+    }
+    if (event.code === 'KeyE') {
+        // turretRotateToggle = true;
     }
 })
 
 
+function turretMouseMove(){
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX - field.offsetLeft;
+        mouseY = e.clientY - field.offsetTop;
+    
+        turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
+        turretAngle -= tankAngle;
+        turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+    
+    })
+}
 
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX - field.offsetLeft;
-    mouseY = e.clientY - field.offsetTop;
-
-    turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
-    turretAngle -= tankAngle;
-    turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-
-})
 
 
 
