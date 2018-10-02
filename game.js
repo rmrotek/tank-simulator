@@ -20,8 +20,8 @@ tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
 
 //turret vars
 var turretBase = document.querySelector('#turret-base');
-var turretBaseX = field.offsetWidth / 2;
-var turretBaseY = field.offsetHeight / 2;
+var turretBaseX = (field.offsetWidth / 2);
+var turretBaseY = (field.offsetHeight / 2);
 var mouseX = 0;
 var mouseY = 0;
 var turretAngle=0;
@@ -55,9 +55,9 @@ window.addEventListener('keydown', function (event) {
         tankAngle--;
         tank.style.transform = 'rotate(' + tankAngle + 'deg)';
         
-        turretAngle = turretAngle +1 ;
-        turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-        console.log(turretAngle);
+        // turretAngle = turretAngle +1 ;
+        // turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+        // console.log(turretAngle);
         return turretAngle;
         
     }
@@ -66,9 +66,9 @@ window.addEventListener('keydown', function (event) {
         tankAngle++;
         tank.style.transform = 'rotate(' + tankAngle + 'deg)';
 
-        turretAngle = turretAngle -1 ;
-        turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-        console.log(turretAngle);
+        // turretAngle = turretAngle -1 ;
+        // turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+        // console.log(turretAngle);
         return turretAngle;
 
 
@@ -96,9 +96,7 @@ window.addEventListener('keyup', function () {
     }
 })
 
-function getTurretAngle(turretAngle) {
-    return turretAngle;
-}
+
 
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX - field.offsetLeft;
@@ -111,16 +109,13 @@ window.addEventListener('mousemove', (e) => {
     // values = values.split(',');
 
     // console.log(`mousex ${mouseX}, mousey ${mouseY}`);
-    console.log(turretAngle);
 
-    getTurretAngle(turretAngle);
 
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180/Math.PI);
 
     turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
 
 })
-
 
 
 
