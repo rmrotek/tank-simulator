@@ -31,6 +31,7 @@ var turretAngle = 0;
 var ball;
 var ballX;
 var ballY;
+var ballAngle;
 
 var turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
 var turretEndY = turretEnd.getBoundingClientRect().top - field.offsetTop;
@@ -74,14 +75,19 @@ function makeBall() {
     ballY = turretEndY;
     ball.style.left = ballX + 'px';
     ball.style.top = ballY + 'px';
+    updateBallAngle();
+
     field.appendChild(ball);
     setTimeout(()=> {
         field.removeChild(ball);
     }, 3000)
 }
 
-setInterval(() => {
+function updateBallAngle() {
     ballAngle = Math.atan2(-(turretBaseX - turretEndCenterX), -(turretBaseY - turretEndCenterY)) * (180 / Math.PI);
+}
+
+setInterval(() => {
 
     ballX = ballX + Math.sin(degInRadius * (ballAngle));
     ballY = ballY + Math.cos(degInRadius * (ballAngle));
@@ -101,8 +107,6 @@ var mouseMoveHandler = function (e) {
 
     //update turret pos
     turretPositionUpdater();
-
-
 }
 
 window.addEventListener('keydown', function (event) {
@@ -207,6 +211,8 @@ window.addEventListener('keyup', function () {
         // turretRotateToggle = true;
     }
 })
+
+
 
 
 
