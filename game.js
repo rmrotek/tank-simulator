@@ -32,9 +32,10 @@ var ball;
 var ballX;
 var ballY;
 
-var turretX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
-var turretY = turretEnd.getBoundingClientRect().top - field.offsetTop;
-
+var turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
+var turretEndY = turretEnd.getBoundingClientRect().top - field.offsetTop;
+var turretEndCenterX = turretEndX - (turretEnd.offsetWidth / 2);
+var turretEndCenterY = turretEndY - (turretEnd.offsetHeight / 2);
 
 
 function offScreenCheck() {
@@ -59,20 +60,34 @@ function offScreenCheck() {
 }
 
 function turretPositionUpdater() {
-    turretX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
-    turretY = turretEnd.getBoundingClientRect().top - field.offsetTop;
+    turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
+    turretEndY = turretEnd.getBoundingClientRect().top - field.offsetTop;
+    turretEndCenterX = turretEndX + (turretEnd.offsetWidth / 2);
+    turretEndCenterY = turretEndY + (turretEnd.offsetHeight / 2);
 }
 
 function makeBall() {
     ball = document.createElement('div');
     ball.classList.add('ball');
     turretPositionUpdater();
-    ballX = turretX;
-    ballY = turretY;
+    ballX = turretEndX;
+    ballY = turretEndY;
     ball.style.left = ballX + 'px';
     ball.style.top = ballY + 'px';
     field.appendChild(ball);
+    setTimeout(()=> {
+        field.removeChild(ball);
+    }, 3000)
 }
+
+setInterval(() => {
+    ballAngle = Math.atan2(-(turretBaseX - turretEndCenterX), -(turretBaseY - turretEndCenterY)) * (180 / Math.PI);
+
+    ballX = ballX + Math.sin(degInRadius * (ballAngle));
+    ballY = ballY + Math.cos(degInRadius * (ballAngle));
+    ball.style.left = ballX + 'px';
+    ball.style.top = ballY + 'px';
+}, 10)
 
 var mouseMoveHandler = function (e) {
     mouseX = e.clientX - field.offsetLeft;
