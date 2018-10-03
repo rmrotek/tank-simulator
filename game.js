@@ -32,6 +32,8 @@ var ball;
 var ballX;
 var ballY;
 var ballAngle;
+var ballReloaded = false;
+
 
 var turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
 var turretEndY = turretEnd.getBoundingClientRect().top - field.offsetTop;
@@ -78,7 +80,8 @@ function makeBall() {
     updateBallAngle();
 
     field.appendChild(ball);
-    setTimeout(()=> {
+
+    setTimeout(() => {
         field.removeChild(ball);
     }, 3000)
 }
@@ -88,7 +91,7 @@ function updateBallAngle() {
 }
 
 setInterval(() => {
-    if(!ball) {
+    if (!ball) {
         return;
     }
 
@@ -186,7 +189,18 @@ window.addEventListener('keydown', function (event) {
         }
     }
     if (event.code === 'Space') {
-        makeBall();
+        if (ballReloaded) {
+            makeBall();
+            ballReloaded = false;
+            console.log(ballReloaded);
+            return ;
+        }
+        if (!ballReloaded) {
+            ballReloaded = true;
+            console.log(ballReloaded);
+            return;
+        }
+
     }
 })
 
