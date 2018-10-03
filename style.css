@@ -58,7 +58,7 @@ body {
     position: absolute;
     z-index: 3;
     top: -1px;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
 
 .ball {

@@ -1,5 +1,6 @@
 var tank = document.querySelector('#tank');
 var field = document.querySelector('#field');
+var turret = document.querySelector('#turret');
 // var position = 0;
 // var acceleration = 0;
 // var rotation = 0;
