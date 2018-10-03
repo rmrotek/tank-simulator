@@ -1,6 +1,7 @@
 var tank = document.querySelector('#tank');
 var field = document.querySelector('#field');
 var turretEnd = document.querySelector('#turret-end');
+var ammoStatus = document.querySelector('.ammo-reload');
 // var position = 0;
 // var acceleration = 0;
 // var rotation = 0;
@@ -194,6 +195,8 @@ window.addEventListener('keydown', function (event) {
             makeBall();
             ballReady = false;
             console.log(ballReady);
+            ammoStatus.innerHTML = 'Reload needed!';
+
             return;
         }
         if (ballReloading) {
@@ -206,14 +209,18 @@ window.addEventListener('keydown', function (event) {
             ballReloading = true;
             i = 3;
             console.log('ball ready in ' + i)
+            ammoStatus.innerHTML = 'Ready in ' + i + 's';
 
             interval = setInterval(() => {
                 i--;
                 console.log('ball ready in ' + i)
+                ammoStatus.innerHTML = 'Ready in ' + i + 's';
+
             }, 1000)
             setTimeout(() => {
                 ballReady = true;
                 ballReloading = false;
+                ammoStatus.innerHTML = 'Ready';
                 console.log('ballReady');
                 clearInterval(interval);
             }, 3000)
