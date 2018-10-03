@@ -19,13 +19,15 @@ var tankY = (field.offsetHeight / 2) - (tank.offsetHeight / 2);
 
 tank.setAttribute('style', `top: ${tankY}px; left: ${tankX}px`);
 
-//turret vars
+//turret base vars
 var turretBase = document.querySelector('#turret-base');
 var turretBaseX = (field.offsetWidth / 2);
 var turretBaseY = (field.offsetHeight / 2);
 var mouseX = 0;
 var mouseY = 0;
 var turretAngle = 0;
+
+
 
 function offScreenCheck() {
     if (turretBaseX > field.offsetWidth) {
@@ -55,6 +57,8 @@ var mouseMoveHandler = function (e) {
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
     turretAngle -= tankAngle;
     turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+    console.log('top' + (turret.getBoundingClientRect().top - field.offsetTop));
+    console.log('left' +(turret.getBoundingClientRect().left - field.offsetLeft));
 
 }
 
