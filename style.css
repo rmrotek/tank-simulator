@@ -3,6 +3,11 @@ body {
     overflow: hidden;
 }
 
+#turret-end {
+    width: 6px;
+    height: 6px;
+}
+
 #app {
     background: black;
     width: 100vw;

@@ -1,6 +1,6 @@
 var tank = document.querySelector('#tank');
 var field = document.querySelector('#field');
-var turret = document.querySelector('#turret');
+var turretEnd = document.querySelector('#turret-end');
 // var position = 0;
 // var acceleration = 0;
 // var rotation = 0;
@@ -27,6 +27,14 @@ var mouseX = 0;
 var mouseY = 0;
 var turretAngle = 0;
 
+//turret
+var ball;
+var ballX;
+var ballY;
+
+var turretX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
+var turretY = turretEnd.getBoundingClientRect().top - field.offsetTop;
+
 
 
 function offScreenCheck() {
@@ -50,6 +58,22 @@ function offScreenCheck() {
     }
 }
 
+function turretPositionUpdater() {
+    turretX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
+    turretY = turretEnd.getBoundingClientRect().top - field.offsetTop;
+}
+
+function makeBall() {
+    ball = document.createElement('div');
+    ball.classList.add('ball');
+    turretPositionUpdater();
+    ballX = turretX;
+    ballY = turretY;
+    ball.style.left = ballX + 'px';
+    ball.style.top = ballY + 'px';
+    field.appendChild(ball);
+}
+
 var mouseMoveHandler = function (e) {
     mouseX = e.clientX - field.offsetLeft;
     mouseY = e.clientY - field.offsetTop;
@@ -57,14 +81,19 @@ var mouseMoveHandler = function (e) {
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
     turretAngle -= tankAngle;
     turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-    console.log('top' + (turret.getBoundingClientRect().top - field.offsetTop));
-    console.log('left' +(turret.getBoundingClientRect().left - field.offsetLeft));
+    // console.log('top' + (turret.getBoundingClientRect().top - field.offsetTop));
+    // console.log('left' +(turret.getBoundingClientRect().left - field.offsetLeft));
+
+    //update turret pos
+    turretPositionUpdater();
+
 
 }
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
         offScreenCheck();
+        turretPositionUpdater();
 
 
         forwardPressed = true;
@@ -77,6 +106,7 @@ window.addEventListener('keydown', function (event) {
     }
     if (event.code === 'KeyS') {
         offScreenCheck();
+        turretPositionUpdater();
 
         backwardsPressed = true;
         tankX = tankX - Math.cos(degInRadius * tankAngle);
@@ -121,6 +151,7 @@ window.addEventListener('keydown', function (event) {
         if (!turretRotateToggle) {
             turretAngle--;
             turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+            turretPositionUpdater();
 
         }
     }
@@ -128,8 +159,12 @@ window.addEventListener('keydown', function (event) {
         if (!turretRotateToggle) {
             turretAngle++;
             turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+            turretPositionUpdater();
 
         }
+    }
+    if (event.code === 'Space') {
+        makeBall();
     }
 })
 
