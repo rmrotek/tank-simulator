@@ -204,11 +204,18 @@ window.addEventListener('keydown', function (event) {
         if (!ballReady) {
             console.log('reloading');
             ballReloading = true;
+            i = 3;
+            console.log('ball ready in ' + i)
+
+            interval = setInterval(() => {
+                i--;
+                console.log('ball ready in ' + i)
+            }, 1000)
             setTimeout(() => {
                 ballReady = true;
                 ballReloading = false;
                 console.log('ballReady');
-
+                clearInterval(interval);
             }, 3000)
             return;
         }
