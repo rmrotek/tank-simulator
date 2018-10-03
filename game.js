@@ -47,14 +47,14 @@ function offScreenCheck() {
     }
 }
 
-var mouseMoveHandler = function(e) {
+var mouseMoveHandler = function (e) {
     mouseX = e.clientX - field.offsetLeft;
     mouseY = e.clientY - field.offsetTop;
 
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
     turretAngle -= tankAngle;
     turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-    
+
 }
 
 window.addEventListener('keydown', function (event) {
@@ -67,7 +67,6 @@ window.addEventListener('keydown', function (event) {
         tankY = tankY + Math.sin(degInRadius * tankAngle);
         turretBaseX = turretBaseX + Math.cos(degInRadius * tankAngle);
         turretBaseY = turretBaseY + Math.sin(degInRadius * tankAngle);
-        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`)
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
     }
@@ -79,7 +78,6 @@ window.addEventListener('keydown', function (event) {
         tankY = tankY - Math.sin(degInRadius * tankAngle);
         turretBaseX = turretBaseX - Math.cos(degInRadius * tankAngle);
         turretBaseY = turretBaseY - Math.sin(degInRadius * tankAngle);
-        console.log(`turretx ${turretBaseX}, turrety ${turretBaseY}`);
 
         tank.style.top = tankY + 'px';
         tank.style.left = tankX + 'px';
@@ -115,10 +113,18 @@ window.addEventListener('keydown', function (event) {
         }
     }
     if (event.code === 'KeyQ') {
-        // turretRotateToggle = true;
+        if (!turretRotateToggle) {
+            turretAngle--;
+            turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+
+        }
     }
     if (event.code === 'KeyE') {
-        // turretRotateToggle = true;
+        if (!turretRotateToggle) {
+            turretAngle++;
+            turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+
+        }
     }
 })
 window.addEventListener('keyup', function () {
