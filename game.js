@@ -32,7 +32,8 @@ var ball;
 var ballX;
 var ballY;
 var ballAngle;
-var ballReloaded = false;
+var ballReady = false;
+var ballReloading = false;
 
 
 var turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
@@ -189,15 +190,26 @@ window.addEventListener('keydown', function (event) {
         }
     }
     if (event.code === 'Space') {
-        if (ballReloaded) {
+        if (ballReady && !ballReloading) {
             makeBall();
-            ballReloaded = false;
-            console.log(ballReloaded);
-            return ;
+            ballReady = false;
+            console.log(ballReady);
+            return;
         }
-        if (!ballReloaded) {
-            ballReloaded = true;
-            console.log(ballReloaded);
+        if (ballReloading) {
+            console.log('reload in progress');
+
+            return;
+        }
+        if (!ballReady) {
+            console.log('reloading');
+            ballReloading = true;
+            setTimeout(() => {
+                ballReady = true;
+                ballReloading = false;
+                console.log('ballReady');
+
+            }, 3000)
             return;
         }
 
