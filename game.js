@@ -127,6 +127,8 @@ window.addEventListener('keydown', function (event) {
         }
     }
 })
+
+//for inevitable switch to interval ;( 
 window.addEventListener('keyup', function () {
     if (event.code === 'KeyW') {
         forwardPressed = false;
