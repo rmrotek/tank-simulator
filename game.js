@@ -28,7 +28,7 @@ var mouseX = 0;
 var mouseY = 0;
 var turretAngle = 0;
 
-//turret
+//ball
 var ball;
 var ballX;
 var ballY;
@@ -36,6 +36,7 @@ var ballAngle;
 var ballReady = false;
 var ballReloading = false;
 
+//turret
 
 var turretEndX = turretEnd.getBoundingClientRect().left - field.offsetLeft;
 var turretEndY = turretEnd.getBoundingClientRect().top - field.offsetTop;
@@ -110,8 +111,6 @@ var mouseMoveHandler = function (e) {
     turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
     turretAngle -= tankAngle;
     turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-    // console.log('top' + (turret.getBoundingClientRect().top - field.offsetTop));
-    // console.log('left' +(turret.getBoundingClientRect().left - field.offsetLeft));
 
     //update turret pos
     turretPositionUpdater();
@@ -170,8 +169,8 @@ window.addEventListener('keydown', function (event) {
             window.removeEventListener('mousemove', mouseMoveHandler);
             turretRotateToggle = false;
             console.log(turretRotateToggle)
+            
             return;
-
         }
     }
     if (event.code === 'KeyQ') {
@@ -179,7 +178,6 @@ window.addEventListener('keydown', function (event) {
             turretAngle--;
             turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
             turretPositionUpdater();
-
         }
     }
     if (event.code === 'KeyE') {
@@ -187,7 +185,6 @@ window.addEventListener('keydown', function (event) {
             turretAngle++;
             turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
             turretPositionUpdater();
-
         }
     }
     if (event.code === 'Space') {
@@ -216,14 +213,15 @@ window.addEventListener('keydown', function (event) {
                 console.log('ball ready in ' + i)
                 ammoStatus.innerHTML = 'Ready in ' + i + 's';
 
-            }, 1000)
+            }, 1000);
+
             setTimeout(() => {
                 ballReady = true;
                 ballReloading = false;
                 ammoStatus.innerHTML = 'Ready';
                 console.log('ballReady');
                 clearInterval(interval);
-            }, 3000)
+            }, 3000);
             return;
         }
 
@@ -239,7 +237,7 @@ window.addEventListener('keyup', function () {
         backwardsPressed = false;
     }
     if (event.code === 'KeyA') {
-        rotateLeft = false
+        rotateLeft = false;
     }
     if (event.code === 'KeyD') {
         rotateRight = false;
