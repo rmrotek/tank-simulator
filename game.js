@@ -47,6 +47,16 @@ function offScreenCheck() {
     }
 }
 
+var mouseMoveHandler = function(e) {
+    mouseX = e.clientX - field.offsetLeft;
+    mouseY = e.clientY - field.offsetTop;
+
+    turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
+    turretAngle -= tankAngle;
+    turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
+    
+}
+
 window.addEventListener('keydown', function (event) {
     if (event.code === 'KeyW') {
         offScreenCheck();
@@ -90,22 +100,14 @@ window.addEventListener('keydown', function (event) {
     }
     if (event.code === 'KeyR') {
         if (!turretRotateToggle) {
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX - field.offsetLeft;
-                mouseY = e.clientY - field.offsetTop;
-            
-                turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
-                turretAngle -= tankAngle;
-                turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-            
-            })
+            window.addEventListener('mousemove', mouseMoveHandler)
             turretRotateToggle = true;
             console.log(turretRotateToggle);
 
             return;
         }
         if (turretRotateToggle) {
-            window.removeEventListener('mousemove', (e));
+            window.removeEventListener('mousemove', mouseMoveHandler);
             turretRotateToggle = false;
             console.log(turretRotateToggle)
             return;
