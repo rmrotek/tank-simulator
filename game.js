@@ -146,17 +146,6 @@ window.addEventListener('keyup', function () {
 })
 
 
-function turretMouseMove(){
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX - field.offsetLeft;
-        mouseY = e.clientY - field.offsetTop;
-    
-        turretAngle = Math.atan2(mouseX - turretBaseX, -(mouseY - turretBaseY)) * (180 / Math.PI);
-        turretAngle -= tankAngle;
-        turretBase.style.transform = 'rotate(' + turretAngle + 'deg)';
-    
-    })
-}
 
 
 
