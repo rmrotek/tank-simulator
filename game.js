@@ -88,6 +88,9 @@ function updateBallAngle() {
 }
 
 setInterval(() => {
+    if(!ball) {
+        return;
+    }
 
     ballX = ballX + Math.sin(degInRadius * (ballAngle));
     ballY = ballY + Math.cos(degInRadius * (ballAngle));
